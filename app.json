@@ -3,9 +3,9 @@
     "pages/classic/classic"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#FFFF00",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "小程序",
+    "navigationBarTitleText": "Blink",
     "backgroundColor": "#FFFFFF",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
