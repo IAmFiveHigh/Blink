@@ -1,5 +1,5 @@
 <!--components/like/index.wxml-->
-<view class='container'>
-  <image src='images/喜欢@2x.png'></image>
-  <text>99+</text>
+<view bindtap='onLike' class='container'>
+  <image src="{{like?like_image_src:dislike_image_src}}"></image>
+  <text>{{count}}</text>
 </view>
