@@ -18,14 +18,19 @@ export class HTTP {
       success: (response) => {
         let code = response.statusCode.toString()
         if (code.startsWith("2")) {
-          params.success(response.data)
+          if (params.success) {
+            params.success(response.data)
+          }
         } else {
           wx.showToast({
             title: '错误',
             icon: 'none',
             duration: 2000
           })
-          params.fail(response)
+          if (params.fail) {
+            params.fail(response)
+          }
+
         }
 
       },

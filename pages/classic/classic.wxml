@@ -1,2 +1,3 @@
-<v-like like="{{classicData.like_status}}" count="{{classicData.fav_num}}"/>
+<v-epsoide index="{{classicData.index}}"/>
+<v-like bind:like='onlike' like="{{classicData.like_status}}" count="{{classicData.fav_num}}"/>
 <v-movie img="{{classicData.image}}" content="{{classicData.content}}"/>

@@ -1,6 +1,8 @@
 // pages/classic/classic.js
 import { ClassicModel} from '../../models/Classic.js'
-let classic = new ClassicModel()
+import { LikeModel} from '../../models/like.js'
+let likeModel = new LikeModel
+let classicModel = new ClassicModel()
 
 Page({
 
@@ -16,12 +18,18 @@ Page({
    */
   onLoad: function(options) {
     
-    classic.getLatest((response) => {
+    classicModel.getLatest((response) => {
       console.log(response)
       this.setData({
         classicData: response
       })
     }) 
+  },
+
+  onlike: function(event) {
+    console.log(event)
+    let behavier = event.detail.behavier
+    likeModel.like(behavier, this.data.id, this.data.type)
   },
 
   /**
