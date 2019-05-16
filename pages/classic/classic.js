@@ -33,6 +33,14 @@ Page({
     likeModel.like(behavier, this.data.id, this.data.type)
   },
 
+  onNext: function(event) {
+    
+  },
+
+  onPrevious: function(event) {
+
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

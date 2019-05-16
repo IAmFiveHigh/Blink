@@ -29,6 +29,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onLeft:function(event){
+      this.triggerEvent('left', {}, {})
+    },
+    onRight:function(event){
+      this.triggerEvent('right', {}, {})
+    }
   }
 })
