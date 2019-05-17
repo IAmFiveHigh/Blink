@@ -7,7 +7,7 @@ Component({
     title: {
       type: String
     },
-    la: {
+    latest: {
       type: Boolean
     },
     first: {
@@ -30,10 +30,16 @@ Component({
    */
   methods: {
     onLeft:function(event){
-      this.triggerEvent('left', {}, {})
+      if (!this.properties.latest) {
+        this.triggerEvent('left', {}, {})
+      }
+      
     },
     onRight:function(event){
-      this.triggerEvent('right', {}, {})
+      if (!this.properties.first) {
+        this.triggerEvent('right', {}, {})
+      }
+      
     }
   }
 })

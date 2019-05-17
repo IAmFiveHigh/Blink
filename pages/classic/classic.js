@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    classicData: null,
     latest: true,
     first: false
   },
@@ -24,6 +25,7 @@ Page({
       this.setData({
         classicData: response
       })
+      this.classicData = response
     }) 
   },
 
@@ -37,8 +39,15 @@ Page({
     
   },
 
-  onPrevious: function(event) {
-
+  onPrevious: function(event) {    
+    let index = this.classicData.index
+    classicModel.getPrevious(index, (response) => {
+      this.classicData = response
+      // this.setData({
+      //   classicData: response
+      // })
+      
+    })
   },
 
   /**
