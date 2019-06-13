@@ -8,6 +8,7 @@ export class ClassicModel extends HTTP {
       url: 'classic/latest',
       success: (response) => {
         sCallBack(response)
+        this._saveLatestIndex(response.index)
       },
       fail: (statusData) => { //因为没有appk 请求不到数据 只好写假数据测试
         sCallBack({
@@ -25,9 +26,9 @@ export class ClassicModel extends HTTP {
     })
   }
 
-  getPrevious(index, sCallBack) {
+  getClassic(index, nextOrPrevious, sCallBack) {
     this.request({
-      url: 'classic/' + index + '/previous',
+      url: 'classic/' + index + '/' + nextOrPrevious,
       success: (response) => {
         sCallBack(response)
       },
@@ -45,6 +46,24 @@ export class ClassicModel extends HTTP {
         })
       }
     })
+  }
+
+
+  isFirst(index) {
+    return index == 1 
+  }
+
+  isLatest(index) {
+    let latestIndex = this._getLatestIndex()
+    return index == latestIndex 
+  }
+
+  _saveLatestIndex(index) {
+    wx.setStorageSync('latest', index)
+  }
+
+  _getLatestIndex() {
+    return wx.getStorageSync('latest')
   }
 }
 

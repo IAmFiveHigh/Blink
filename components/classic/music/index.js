@@ -15,7 +15,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tagSrc: "/components/classic/music/images/music@tag.png",
     pauseSrc: "/components/classic/music/images/player@waitting.png",
     playSrc: "/components/classic/music/images/player@playing.png"
   },
