@@ -21,7 +21,6 @@ Page({
   onLoad: function(options) {
     
     classicModel.getLatest((response) => {
-      console.log(response)
       this.setData({
         classicData: response
       })
@@ -30,9 +29,8 @@ Page({
   },
 
   onlike: function(event) {
-    console.log(event)
-    let behavier = event.detail.behavier
-    likeModel.like(behavier, this.data.id, this.data.type)
+    let behavior = event.detail.behavior
+    likeModel.like(behavior, this.classicData.id, this.classicData.type)
   },
 
   onNext: function(event) {

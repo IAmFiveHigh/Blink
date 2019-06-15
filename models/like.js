@@ -4,7 +4,7 @@ import {
 
 export class LikeModel extends HTTP {
   like(behaver, id, catergory) {
-    let url = behaver == "like" ? "/like" : "/like/cancel"
+    let url = behaver == "like" ? "like" : "like/cancel"
     this.request({
       url: url,
       method: "POST",

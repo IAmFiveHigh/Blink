@@ -9,43 +9,31 @@ export class ClassicModel extends HTTP {
       success: (response) => {
         sCallBack(response)
         this._saveLatestIndex(response.index)
+        wx.setStorageSync(this._getKey(response.index), response)
       },
       fail: (statusData) => { //因为没有appk 请求不到数据 只好写假数据测试
-        sCallBack({
-          content: '人生不能象做菜，把所有料准备好再下锅',
-          fav_num: 11,
-          id: 1,
-          image: 'http://bl.7yue.pro/images/movie.8.png',
-          index: 8,
-          like_status: 0,
-          pubdate: '2018-06-22',
-          title: '李安《饮食男女》',
-          type: 100
-        })
+        
       }
     })
   }
 
   getClassic(index, nextOrPrevious, sCallBack) {
-    this.request({
-      url: 'classic/' + index + '/' + nextOrPrevious,
-      success: (response) => {
-        sCallBack(response)
-      },
-      fail: (error) => {
-        sCallBack({
-          content: '谁念过 千字文章 秋收冬已藏',
-          fav_num: 10,
-          id: 1,
-          image: 'http://bl.7yue.pro/images/music.7.png',
-          index: 7,
-          like_status: 0,
-          pubdate: '2018-06-22',
-          title: '不才《参商》',
-          type: 100
-        })
-      }
-    })
+    let classic_storage = nextOrPrevious == 'next' ? wx.getStorageSync(this._getKey(index+1)) : wx.getStorageSync(this._getKey(index-1))
+    if (classic_storage) {
+      sCallBack(classic_storage)
+    }else {
+      this.request({
+        url: 'classic/' + index + '/' + nextOrPrevious,
+        success: (response) => {
+          sCallBack(response)
+          wx.setStorageSync(this._getKey(response.index), response)
+        },
+        fail: (error) => {
+          
+        }
+      })
+    }
+    
   }
 
 
@@ -64,6 +52,11 @@ export class ClassicModel extends HTTP {
 
   _getLatestIndex() {
     return wx.getStorageSync('latest')
+  }
+
+  _getKey(key) {
+    let newKey = 'key_classic_' + key
+    return newKey
   }
 }
 

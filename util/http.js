@@ -23,7 +23,7 @@ export class HTTP {
           }
         } else {
           wx.showToast({
-            title: '错误',
+            title: response.data,
             icon: 'none',
             duration: 2000
           })
