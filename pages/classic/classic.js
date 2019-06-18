@@ -12,7 +12,9 @@ Page({
   data: {
     classicData: null,
     latest: true,
-    first: false
+    first: false,
+    likeStatus: false,
+    likeCount: 0
   },
 
   /**
@@ -22,15 +24,25 @@ Page({
     
     classicModel.getLatest((response) => {
       this.setData({
-        classicData: response
+        classicData: response,
+        likeCount: response.fav_num,
+        likeStatus: response.like_status
       })
       this.classicData = response
-    }) 
+    })
+    
   },
 
   onlike: function(event) {
     let behavior = event.detail.behavior
-    likeModel.like(behavior, this.classicData.id, this.classicData.type)
+    likeModel.like(behavior, this.classicData.id, this.classicData.type, (response)=> {
+      console.log(response)
+      wx.showToast({
+        title: response,
+        icon: 'success',
+        duration: 2000
+      })
+    })
   },
 
   onNext: function(event) {
@@ -46,12 +58,25 @@ Page({
     let index = this.classicData.index
     classicModel.getClassic(index, nextOrPrevious, (response) => {
       this.classicData = response
+      this._getLikeStatus(response.id, response.type)
       this.setData({
         classicData: response,
         latest: classicModel.isLatest(response.index),
         first: classicModel.isFirst(response.index)
       })
+      
+    })
+  },
 
+  _getLikeStatus: function(artId, catergory) {
+    likeModel.getLikeStatus(artId, catergory, (response)=>{
+      console.log('likeCount: ' + response.fav_num)
+      console.log('art_id: ' + response.art_id)
+      console.log('like_status: ' + response.like_status)
+      this.setData({
+        likeCount: response.fav_num,
+        likeStatus: response.like_status
+      })
     })
   },
 

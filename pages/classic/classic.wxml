@@ -1,7 +1,7 @@
 <view class='container'>
   <view class='header'>
     <v-epsoide class='epsoide' index="{{classicData.index}}" />
-    <v-like class='like' bind:like='onlike' like="{{classicData.like_status}}" count="{{classicData.fav_num}}" />
+    <v-like class='like' bind:like='onlike' like="{{likeStatus}}" count="{{likeCount}}" />
   </view>
   <v-movie img="{{classicData.image}}" content="{{classicData.content}}" />
   <!-- <v-music />  -->
